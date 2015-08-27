@@ -1,0 +1,7 @@
+[9, 8, 3654, 3601, 406, 450]
+number of men 9
+number of women 8
+number of words used for men 3654
+number of words for women 3601
+words per man 406
+ words per woman 450
