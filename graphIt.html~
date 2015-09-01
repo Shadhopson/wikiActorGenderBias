@@ -79,9 +79,7 @@
         <script type="text/javascript">
             $("form").submit(function() {
                 var newA = actressWordList[document.getElementById("a").value];
-		newA = (newA*100000)/85365
                 var newB = actorWordList[document.getElementById("a").value];
-		newB = (newB*100000)/135014
                // var newC = document.getElementById("c").value;
 
                 svg.selectAll("rect")

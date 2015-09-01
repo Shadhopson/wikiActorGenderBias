@@ -49,8 +49,8 @@ for name in actor_list:
     print countDay
     wikiUrl = 'https://en.wikipedia.org/wiki/'+name
 #These should be done many times, but here we're accessing the website so we'll need to slow things down
-    if month ==1 and countDay ==1:
-        time.sleep(2)
+    if month ==1:
+        time.sleep(3)
         wordFrequency = {}
         try:
             wikiPage = urllib2.urlopen(wikiUrl)
