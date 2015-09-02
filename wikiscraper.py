@@ -20,14 +20,16 @@ from bs4 import BeautifulSoup
 import urllib2
 import time
 import re
-
+from testActressWords import actressWordList
+from testActorWords import actorWordList
+from testActingData import genderData
 # setting variables we want to go through everything
-menWordFrequency ={}
-womenWordFrequency ={}
-manCount =0
-manWordCount =0
-womanCount=0
-womanWordCount=0
+menWordFrequency = actorWordList
+womenWordFrequency =actressWordList
+manCount =genderData[0]
+manWordCount =genderData[2]
+womanCount=genderData[1]
+womanWordCount=genderData[3]
 failSiteList =[]
 with open('actorNames.txt') as f:
     actor_list = [line.rstrip('\n') for line in f]
@@ -43,20 +45,41 @@ for name in actor_list:
     if countDay >28:
         countDay = 1
         month +=1
-    print name
-    print count
-    print month
-    print countDay
+    
+    #print name
+    #print count
+    #print month
+    #print countDay
     wikiUrl = 'https://en.wikipedia.org/wiki/'+name
 #These should be done many times, but here we're accessing the website so we'll need to slow things down
-    if month ==1:
+    if month ==1 and countDay==5:
         time.sleep(3)
         wordFrequency = {}
+        '''if len(str(month))<2:
+            strMonth = "0"+str(month)
+        else:
+            strMonth = str(month)
+        if len(str(countDay))<2:
+            strDay = "0"+str(countDay)
+        else:
+            strDay = str(countDay)
+        date = strMonth+"-"+strDay
+        months =["January","February","March","April","May","June","July", "August","September","October","November","December"]
+        wordDate =months[month-1]+ " "+ str(countDay)
+        print date
+        print wordDate'''
         try:
             wikiPage = urllib2.urlopen(wikiUrl)
             wikiHtml =wikiPage.read()
             wikiPage.close()
             wikiSoup = BeautifulSoup(wikiHtml,'lxml')
+            ''' actorBDayText = wikiSoup.find(class_="infobox").get_text()
+            if (date) not in actorBDayText:
+                if(wordDate) not in actorBDayText:
+                    failSiteList.append("noBD"+ wikiUrl)
+                    print actorBDayText
+                    continue
+            print "Bday text " +  actorBDayText'''
             actorPar = wikiSoup.find_all('p')
             for p in actorPar:
                 wordList = p.get_text().split()
@@ -64,20 +87,20 @@ for name in actor_list:
                     #gets rid of the characters in the string from our word
                     word = re.sub('[0-9]','',word)
                     word = str(re.sub('\W+','',word).lower())
-                    print word
+                    #print word
                     if word in wordFrequency.keys():
                         wordFrequency[word]+=1
                     else:
                         wordFrequency[word]=1
-            print wordFrequency
+            #print wordFrequency
             try:
-                print ("he: " +str(wordFrequency["he"]))
+                #print ("he: " +str(wordFrequency["he"]))
                 heCount = wordFrequency["he"]
             except:
                 heCount=0
                 
             try:
-                print "she: "+str(wordFrequency["she"])
+                #print "she: "+str(wordFrequency["she"])
                 sheCount =wordFrequency["she"]
             except:
                 sheCount=0
@@ -98,18 +121,18 @@ for name in actor_list:
                         menWordFrequency[word]+=wordFrequency[word]
                     else:
                         menWordFrequency[word] = wordFrequency[word]
-            print "men: " + str(menWordFrequency)
-            print "women: " + str(womenWordFrequency)
-            print "man word count " + str(manWordCount)
-            print "man count " + str(manCount)
-            print "woman word count " +str(womanWordCount)
-            print  "woman count "+str(womanCount)
+            #print "men: " + str(menWordFrequency)
+            #print "women: " + str(womenWordFrequency)
+           # print "man word count " + str(manWordCount)
+           # print "man count " + str(manCount)
+           # print "woman word count " +str(womanWordCount)
+           # print  "woman count "+str(womanCount)
         except:
             failSiteList.append(wikiUrl)
 
 print failSiteList
-print "man: " + str(menWordFrequency)
-print "woman: " + str(womenWordFrequency)
+#print "man: " + str(menWordFrequency)
+#print "woman: " + str(womenWordFrequency)
 print "Man Word Count: " + str(manWordCount)
 print "Woman Word Count: " + str(womanWordCount)
 print "men: " + str(manCount)
