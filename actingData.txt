@@ -1,7 +1,0 @@
-[282, 218, 135374, 86137, 480, 395]
-number of men 282
-number of women 218
-number of words used for men 135374
-number of words for women 86137
-words per man 480
- words per woman 395

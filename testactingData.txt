@@ -1,7 +1,0 @@
-[291, 227, 143246, 91010, 492, 400]
-number of men 291
-number of women 227
-number of words used for men 143246
-number of words for women 91010
-words per man 492
- words per woman 400

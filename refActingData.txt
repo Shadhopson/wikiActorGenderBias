@@ -1,0 +1,7 @@
+genderData = [10, 7, 8234, 3591, 823, 513]
+#number of men 10
+#number of women 7
+#number of words used for men 8234
+#number of words for women 3591
+#words per man 823
+ #words per woman 513
