@@ -48,6 +48,7 @@
         <script src="http://d3js.org/d3.v3.min.js"></script>
         <script src ="testActorWords.js"></script>
 	<script src = "testActressWords.js"></script>
+        <script src = "testActingData.js"></script>
     </head>
     <body>
         <div id = "fixed">
@@ -65,7 +66,7 @@
         </div>
         <!--d3 code-->
         <script>
-            var data = [((actressWordList["children"]*100000)/85365),((actorWordList["children"]*100000)/135014)];
+            var data = [((actressWordList["children"]*100000)/genderData[3]),((actorWordList["children"]*100000)/genderData[2])];
             var margin = {top: 20, right: 150, bottom: 30, left: 410},
                 width = 960 - margin.left - margin.right,
                 height = 500 - margin.top - margin.bottom;
@@ -123,10 +124,10 @@
         <!--on form submit-->
         <script type="text/javascript">
             $("form").submit(function() {
-                var newA = actressWordList[document.getElementById("a").value];
-		newA = (newA*100000)/85365
-                var newB = actorWordList[document.getElementById("a").value];
-		newB = (newB*100000)/135014
+                var newA = actressWordList[document.getElementById("a").value.toLowerCase()];
+		newA = (newA*100000)/genderData[3]
+                var newB = actorWordList[document.getElementById("a").value.toLowerCase()];
+		newB = (newB*100000)/genderData[2]
                 svg.selectAll("rect")
                     .data([newA, newB])
                     .attr("y", function(d) { return height - d;})

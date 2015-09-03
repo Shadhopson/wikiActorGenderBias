@@ -1,7 +1,0 @@
-genderData = [2, 2, 1282, 536, 641, 268]
-#number of men 2
-#number of women 2
-#number of words used for men 1282
-#number of words for women 536
-#words per man 641
- #words per woman 268

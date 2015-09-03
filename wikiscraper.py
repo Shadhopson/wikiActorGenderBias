@@ -52,7 +52,7 @@ for name in actor_list:
     #print countDay
     wikiUrl = 'https://en.wikipedia.org/wiki/'+name
 #These should be done many times, but here we're accessing the website so we'll need to slow things down
-    if month ==1 and countDay==5 and (count ==1 or count ==2):
+    if month ==10:
         time.sleep(3)
         wordFrequency = {}
         if len(str(month))<2:
@@ -66,7 +66,7 @@ for name in actor_list:
         date = strMonth+"-"+strDay
         months =["January","February","March","April","May","June","July", "August","September","October","November","December"]
         wordDate =months[month-1]+ " "+ str(countDay)
-        print date
+        #print date
         print wordDate
         try:
             wikiPage = urllib2.urlopen(wikiUrl)
@@ -77,9 +77,9 @@ for name in actor_list:
             if (date) not in actorBDayText:
                 if(wordDate) not in actorBDayText:
                     failSiteList.append("noBD"+ wikiUrl)
-                    print actorBDayText
+                   # print actorBDayText
                     continue
-            print "Bday text " +  actorBDayText
+           # print "Bday text " +  actorBDayText
             actorPar = wikiSoup.find_all('p')
             for p in actorPar:
                 wordList = p.get_text().split()
