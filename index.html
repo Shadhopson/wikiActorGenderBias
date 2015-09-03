@@ -1,1 +1,139 @@
-hello world
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            body{
+                background-color:moccasin;
+            }
+            form {
+                margin:auto;
+                width: 50%;
+
+            }
+            p {
+                margin-left:400px;
+                width:50%;
+            } 
+             #fixed {
+                
+                position:absolute;
+                width: 340px;
+                border: 10px;
+                top:0;
+                left:10;
+                margin-left:10;
+                margin-right:10
+                }
+
+           /* body {
+                font: 10px sans-serif;
+            }
+            .axis path,
+            .axis line {
+              fill: none;
+              stroke: #000;
+              shape-rendering: crispEdges;
+            }
+
+            .bar {
+              fill: blue;
+            }
+
+            .x.axis path {
+              display: none;
+            }*/
+        </style>
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src ="testActorWords.js"></script>
+	<script src = "testActressWords.js"></script>
+        <script src = "testActingData.js"></script>
+    </head>
+    <body>
+        <div id = "fixed">
+            <h2> Explore How We Talk about Actresses and Actors!</h2>
+            <h5> After programmatically searching through almost 6000 actors and actresses's Wikipedia biographies we've built up information on how frequently we use words when describing actresses and actors. It's easy to find lots of insights into how we view women and men differently. You can find some of our findings here and feel free to tell us what you find!</h5>
+        </div>
+        <p>Words Used With Actresses Vs. Actors</p>
+        <div id="chart"></div>
+        <div>
+	    <p>Test a word!</p>
+            <form>
+                A: <input class="fields" id="a" value="children" type="text"/>
+                <input type="submit" value = "Check it out!" />
+            </form>
+        </div>
+        <!--d3 code-->
+        <script>
+            var data = [((actressWordList["children"]*100000)/genderData[3]),((actorWordList["children"]*100000)/genderData[2])];
+            var margin = {top: 20, right: 150, bottom: 30, left: 410},
+                width = 960 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
+            //var formatPercent = d3.format(".0%");
+            var subjects = ["Women","Men"];
+             var x = d3.scale.ordinal()
+                .domain(subjects.map(function(d){return d;}))
+                .rangeRoundBands([0, width], .1);
+
+            var y = d3.scale.linear()
+                .domain([0,height/100000])
+                .range([height, 0]);
+
+             var xAxis = d3.svg.axis()
+                .scale(x)
+                .orient("bottom");
+            
+            var yAxis = d3.svg.axis()
+                .scale(y)
+                .orient("left")
+                .ticks(10,"%");
+
+            var svg = d3.select(document.getElementById("chart")).append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+              .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+            
+            svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis);            
+
+            svg.append("g")
+                .attr("class", "y axis")
+                .call(yAxis)
+                .append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 6)
+                .attr("dy", ".71em")
+                .style("text-anchor", "end")
+                .text("Frequency");    
+
+            var colors = ["orange","blue"];
+            svg.selectAll(".bar")
+                .data(data)
+              .enter().append("rect")
+                .attr("x", function(d, i) { return i * 200; })
+                .attr("width", function(d) {return 200;})
+                .attr("y", function(d) { return height - d;})
+                .attr("height", function(d) { return d; })
+                .attr("fill",function(d,i){return colors[data.indexOf(d)]});
+                
+        </script>
+        <!--on form submit-->
+        <script type="text/javascript">
+            $("form").submit(function() {
+                var newA = actressWordList[document.getElementById("a").value.toLowerCase()];
+		newA = (newA*100000)/genderData[3]
+                var newB = actorWordList[document.getElementById("a").value.toLowerCase()];
+		newB = (newB*100000)/genderData[2]
+                svg.selectAll("rect")
+                    .data([newA, newB])
+                    .attr("y", function(d) { return height - d;})
+                    .attr("height", function(d) { return d; });
+                return false;
+            });
+        </script>
+    </body>
+</html>
