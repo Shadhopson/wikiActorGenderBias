@@ -13,8 +13,7 @@ for word in actorWordList:
          difference = abs((actorWordList[word]*100000)/genderData[2] -0)
     menRatio = (normalizedActorWords+1)/(normalizedActressWords+1)
     womenRatio =  (normalizedActressWords+1)/(normalizedActorWords+1)
-    if difference > 50 and (menRatio >1.5 or womenRatio>1.5):
+    if difference > 20 and (menRatio >1.2 or womenRatio>1.2):
         print word + " women: " + str(normalizedActressWords) + " men: " + str(normalizedActorWords)
-
 print actorWordList["he"]
 print actressWordList["he"]

@@ -1,21 +1,3 @@
-#This program will get names from file and read it into a list.
-
-#It will then start a for loop that goes through that list in groups of 20.
-#This keeps everyone's birthdays the same
-
-#It will add their names to the end of the web address:
-# https://en.wikipedia.org/wiki/
-
-# It will go to that site and check that the birthday matches up
-# with the current batch by checking if it's inside of text in a child of
-# class infobox biography vcard
-
-#Lastly it will pull out text elements in p elements.
-# I may also have it collect movie names, but uncertain.
-
-# One possible use is to just check the frequency words get used in both groups.# a list of the most frequently used words, and the words with the biggest differences could be interesting.
-
-#First lets start with an easier one. Go to a site, collect all of the links and put them in a list, then go to each link and create a list of the most commonly used words, then do the same for the other site.
 from bs4 import BeautifulSoup
 import urllib2
 import time

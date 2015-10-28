@@ -32,10 +32,6 @@ for link in urlList:
         except:
             print actor.get_text()
 
-    #actorNames.writelines(actorList)
     actorNames.close()
     time.sleep(2)
-    #print actorList
-    #print actorAll
-    #print urlList
 
