@@ -3,3 +3,7 @@ Contains all the programs, and results for collecting actor names, searching wik
 
 
 To see the resulting graph simply run graphIt.html
+
+An example graph:
+![example graphIt graph] (https://raw.githubusercontent.com/Shadhopson/wikiActorGenderBias/master/wikiActorGenderBias_screenshot.png)
+
